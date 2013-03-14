@@ -1,4 +1,4 @@
-meteor/public/*.json
+meteor/client/dump.js
 playground/
 dumps/
 node_modules/

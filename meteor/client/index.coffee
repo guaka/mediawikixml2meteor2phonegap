@@ -48,6 +48,5 @@ Meteor.startup ->
     page = 'Main Page'
   Session.set 'currentTitle', page
 
-  $.getJSON 'dump.json', (data) ->
-    json = data.mediawiki
-    Session.set 'jsonChanged', Meteor.uuid()
+  json = jsondump.mediawiki
+  Session.set 'jsonChanged', Meteor.uuid()

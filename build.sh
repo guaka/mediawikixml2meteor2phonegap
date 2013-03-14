@@ -9,6 +9,8 @@
 # 
 #
 
+WIKI=${1-hitchwiki}
+
 cd $(dirname $0)
 
 mkdir -p dumps
@@ -21,11 +23,14 @@ if [ ! -f dumps/hitchwiki.xml ]; then
     cd ..
 fi
 
-./xml2json.js hitchwiki
-cp dumps/hitchwiki.json meteor/public/dump.json
+if [ ! -f dumps/$WIKI.json ]; then
+    ./xml2json.js $WIKI
+fi
+
+cp dumps/$WIKI.js meteor/client/dump.js
 
 cd meteor
-meteor deploy hitchwiki.meteor.com
+meteor deploy $WIKI.meteor.com
 
 echo Waiting a bit for meteor servers to settle down.
 sleep 5
@@ -35,4 +40,4 @@ sleep 5
 # This will only work if oyu have meteor-phonegap installed in this specific directory.
 # 
 cd ~/code/meteor-phonegap
-./meteor2cordova.sh hitchwiki.meteor.com
+./meteor2cordova.sh $WIKI.meteor.com

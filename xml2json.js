@@ -18,7 +18,9 @@ fs.readFile('dumps/' + wiki + '.xml', function(err, data) {
   var json = parser.toJson(xml, { sanitize: false });
   console.log('json size:', json.length);
 
-  fs.writeFile('dumps/' + wiki + '.json', json, function(err) {
+  var js = "var jsondump = " + json;
+
+  fs.writeFile('dumps/' + wiki + '.js', js, function(err) {
     if (err) {
       throw err;
     }
