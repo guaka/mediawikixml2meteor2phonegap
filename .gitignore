@@ -1,3 +1,4 @@
 meteor/public/*.xml
 playground/
 dumps/
+node_modules/
