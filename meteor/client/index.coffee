@@ -12,12 +12,14 @@ getPage = (title) ->
   page = _.find json.page, (p) ->
     p.title == title
 
-value = null
+getPageText = (title) ->
+  getPage(title)?.revision.text.$t
+
 
 Template.page.content = ->
   if json?
     title = Session.get 'currentTitle'
-    value = getPage(title)?.revision.text.$t
+    value = getPageText(title)
   if value?
     redirect = value.match /\#redirect \[\[(.+?)\]\]/i
     if redirect
@@ -26,6 +28,7 @@ Template.page.content = ->
       unsafe articleParse value
   else
     'no page found, or still processing...'
+
 
 unsafe = (text) ->
   if text?
@@ -50,3 +53,9 @@ Meteor.startup ->
 
   json = jsondump.mediawiki
   Session.set 'jsonChanged', Meteor.uuid()
+
+  css = document.createElement "style"
+  css.type = "text/css"
+  css.innerHTML = getPageText('MediaWiki:Common.css')
+  document.body.appendChild(css)
+

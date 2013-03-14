@@ -1,7 +1,16 @@
 
 articleParse = (text) ->
 
-  console.log text
+  # {{NUMBEROFARTICLES}}
+  text = text.replace /\{\{NUMBEROFARTICLES\}\}/, (_.filter json.page, (p) -> p.ns == '0' and p.revision.text.length > 100).length
+
+  text = text.replace /\{\{(.+?)\}\}/, (all, arg1) ->
+    t = getPageText "Template:" + ucfirst arg1
+    if not t?
+      t = 'Template:' + arg1
+    t
+
+  # text = text.replace /<noinclude>.*?<\/noinclude>/gmi, ''  # doesn't work, hacky fix in css
 
   # simple attempt at lists
   text = text.replace /^\*(.*)/gm, '<ul><li>$1</li></ul>'
@@ -13,10 +22,10 @@ articleParse = (text) ->
   text = text.replace /\[\[(File|Image):(.+?)\|(.+?)\]\]/g, ''
 
   # don't match [[link|text]]
-  text = text.replace /\[\[([^|]+?)\]\]/g, '<a href="#$1">$1</a>'
+  text = text.replace /\[\[([^|]+?)\]\]/g, '<a href="#$1" class="mw-redirect">$1</a>'
 
   # and now match [[link|text]]
-  text = text.replace /\[\[(.+?)\|(.+?)\]\]/g, '<a href="#$1">$2</a>'
+  text = text.replace /\[\[(.+?)\|(.+?)\]\]/g, '<a href="#$1" class="mw-redirect">$2</a>'
 
   # hyperlinks
   text = text.replace /\[(.+?) (.+?)\]/g, '<a href="$1">$2</a>'
@@ -34,5 +43,3 @@ articleParse = (text) ->
   # ditch some special stuff
   text = text.replace /__(NOTOC|NOEDITSECTION)__/g, ''
 
-  # {{NUMBEROFARTICLES}}
-  text = text.replace /\{\{NUMBEROFARTICLES\}\}/, (_.filter json.page, (p) -> p.ns == '0' and p.revision.text.length > 100).length
