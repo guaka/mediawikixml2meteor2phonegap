@@ -9,9 +9,10 @@ This is a work in progress with running code.
 Mainly check `build.sh`
 
 
-Looks a bit like http://hitchwiki.meteor.com/
+Examples
+--------
 
-Expect examples in play.google.com any day now.
+* http://hitchwiki.meteor.com/ and https://play.google.com/store/apps/details?id=io.cordova.cordovahitchwikimeteorcom
 
 
 
