@@ -9,13 +9,13 @@ if (!wiki || wiki.length == 0) {
   wiki = 'hitchwiki';
 }
 
-console.log('Processing ', wiki);
+console.log('Processing', wiki);
 
 fs.readFile('dumps/' + wiki + '.xml', function(err, data) {
   var xml = data;
   console.log ('xml size:', data.length);
 
-  var json = parser.toJson(xml, { sanitize: false });
+  var json = parser.toJson(xml, { sanitize: false, trim: false });
   console.log('json size:', json.length);
 
   var js = "var jsondump = " + json;
