@@ -17,14 +17,13 @@ Template.page.content = ->
     title = Session.get 'currentTitle'
     value = getPage(title)?.revision.text
   if value?
-    console.log value
     redirect = value.match /\#redirect \[\[(.+?)\]\]/i
     if redirect
       Session.set 'currentTitle', redirect[1]
     else
       unsafe articleParse value
   else
-    'no page found'
+    'no page found, or still processing...'
 
 unsafe = (text) ->
   if text?
