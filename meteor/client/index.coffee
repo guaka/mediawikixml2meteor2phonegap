@@ -6,7 +6,6 @@ Template.page.siteName = ->
 
 json = null
 
-
 getPage = (title) ->
   title = title.replace /_/g, ' '
   page = _.find json.page, (p) ->
@@ -16,10 +15,16 @@ getPage = (title) ->
 Template.page.content = ->
   if json?
     title = Session.get 'currentTitle'
-    revision = getPage(title)?.revision.text
-    if revision?
-      value = unsafe articleParse revision
-  if value? then value else 'no page found'
+    value = getPage(title)?.revision.text
+  if value?
+    console.log value
+    redirect = value.match /\#redirect \[\[(.+?)\]\]/i
+    if redirect
+      Session.set 'currentTitle', redirect[1]
+    else
+      unsafe articleParse value
+  else
+    'no page found'
 
 unsafe = (text) ->
   if text?
@@ -43,7 +48,8 @@ Meteor.startup ->
   Session.set 'currentTitle', page
 
   Meteor.http.get '/test.xml', {}, (error, data) ->
-    # content = '<' + data.content.split('<')[1]
+    console.log error
+    console.log 'xml size: ', data.content.length
     xml = data.content
     json = $.xml2json xml
     Session.set 'jsonChanged', Meteor.uuid()
