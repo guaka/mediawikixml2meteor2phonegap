@@ -12,8 +12,8 @@ Mainly check `build.sh`
 
 Looks a bit like http://hitchwiki.meteor.com/
 
-Expect examples in play.google.com any day now
+Expect examples in play.google.com any day now.
 
 
 
-Currently GPLv3, but might consider switching to MIT license if it makes sense.
+Currently GPLv2+ for compatability with MediaWiki.
