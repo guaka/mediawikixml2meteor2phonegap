@@ -99,7 +99,12 @@
     };//node.attributes
     if(obj){
      obj = $.extend( (txt!='' ? new String(txt) : {}),/* {text:txt},*/ obj || {}/*, att || {}*/);
-     txt = (obj.text) ? (typeof(obj.text)=='object' ? obj.text : [obj.text || '']).concat([txt]) : txt;
+      try {
+        txt = (obj.text) ? (typeof(obj.text)=='object' ? obj.text : [obj.text || '']).concat([txt]) : txt;
+      }
+      catch (err) {
+        console.log (err);
+      }
      if(txt) obj.text = txt;
      txt = '';
     };
