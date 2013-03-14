@@ -1,7 +1,5 @@
 
-This is a proof of concept of turning a MediaWiki XML dump into a Meteor app.
 
-This can in turn be fed into https://github.com/guaka/meteor-phonegap in order to get a neat app version of a wiki.
+Turn a MediaWiki XML dump into a Meteor app and consequently into a Phonegap app.
 
-
-Currently GPLv3, open to switch to MIT if it makes sense.
+Currently GPLv3, but might consider switching to MIT license if it makes sense.
