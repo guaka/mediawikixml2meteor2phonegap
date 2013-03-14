@@ -30,3 +30,6 @@ articleParse = (text) ->
 
   # ditch some special stuff
   text = text.replace /__NOTOC__/, ''
+
+  # {{NUMBEROFARTICLES}}
+  text = text.replace /\{\{NUMBEROFARTICLES\}\}/, (_.filter json.page, (p) -> p.ns == '0' and p.revision.text.length > 100).length
