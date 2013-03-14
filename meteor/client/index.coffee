@@ -7,15 +7,17 @@ Template.page.siteName = ->
 json = null
 
 getPage = (title) ->
+  console.log title
   title = title.replace /_/g, ' '
   page = _.find json.page, (p) ->
     p.title == title
 
+value = null
 
 Template.page.content = ->
   if json?
     title = Session.get 'currentTitle'
-    value = getPage(title)?.revision.text
+    value = getPage(title)?.revision.text.$t
   if value?
     redirect = value.match /\#redirect \[\[(.+?)\]\]/i
     if redirect
@@ -46,10 +48,6 @@ Meteor.startup ->
     page = 'Main Page'
   Session.set 'currentTitle', page
 
-  Meteor.http.get '/dump.xml', {}, (error, data) ->
-    console.log error
-    console.log 'xml size: ', data.content.length
-    xml = data.content
-    json = $.xml2json xml
+  $.getJSON 'dump.json', (data) ->
+    json = data.mediawiki
     Session.set 'jsonChanged', Meteor.uuid()
-
