@@ -43,6 +43,7 @@ Template.page.events
     href = if e.srcElement? then e.srcElement.href else e.currentTarget.href
     title = href.split('#')[1]
     Session.set 'currentTitle', ucfirst title
+    window.scrollTo 0, 0
 
 
 Meteor.startup ->
