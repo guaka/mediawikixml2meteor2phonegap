@@ -32,7 +32,7 @@ articleParse = (text) ->
   text = text.replace /\=\=(.*?)\=\=/g, '<h2>$1</h2>'
 
   # ditch some special stuff
-  text = text.replace /__NOTOC__/, ''
+  text = text.replace /__(NOTOC|NOEDITSECTION)__/g, ''
 
   # {{NUMBEROFARTICLES}}
   text = text.replace /\{\{NUMBEROFARTICLES\}\}/, (_.filter json.page, (p) -> p.ns == '0' and p.revision.text.length > 100).length
