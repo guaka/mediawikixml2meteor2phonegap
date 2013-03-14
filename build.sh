@@ -21,7 +21,8 @@ if [ ! -f dumps/hitchwiki.xml ]; then
     cd ..
 fi
 
-cp dumps/hitchwiki.xml meteor/public/dump.xml
+./xml2json.js hitchwiki
+cp dumps/hitchwiki.json meteor/public/dump.json
 
 cd meteor
 meteor deploy hitchwiki.meteor.com
