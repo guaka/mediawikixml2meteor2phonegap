@@ -18,6 +18,9 @@ articleParse = (text) ->
   # and now match [[link|text]]
   text = text.replace /\[\[(.+?)\|(.+?)\]\]/g, '<a href="#$1">$2</a>'
 
+  # hyperlinks
+  text = text.replace /\[(.+?) (.+?)\]/g, '<a href="$1">$2</a>'
+
   # bold
   text = text.replace /\'\'\'(.*?)\'\'\'/g, '<strong>$1</strong>'
   # and italic
