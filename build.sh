@@ -23,7 +23,7 @@ if [ ! -f dumps/hitchwiki.xml ]; then
     cd ..
 fi
 
-if [ ! -f dumps/$WIKI.json ]; then
+if [ ! -f dumps/$WIKI.js ]; then
     ./xml2json.js $WIKI
 fi
 
