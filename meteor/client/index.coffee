@@ -47,7 +47,7 @@ Meteor.startup ->
     page = 'Main Page'
   Session.set 'currentTitle', page
 
-  Meteor.http.get '/test.xml', {}, (error, data) ->
+  Meteor.http.get '/dump.xml', {}, (error, data) ->
     console.log error
     console.log 'xml size: ', data.content.length
     xml = data.content
