@@ -8,3 +8,15 @@ h1 {
   margin: 0;
   padding: 0;
 }
+
+#content {
+  padding-bottom: 10px;
+  border-bottom: 1px dotted #888;
+}
+
+
+#footer {
+  margin-top: 10px;
+  float: right;
+  font-size: 85%;
+}
