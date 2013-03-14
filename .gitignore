@@ -1,2 +1,3 @@
 meteor/public/*.xml
-playground
+playground/
+dumps/
