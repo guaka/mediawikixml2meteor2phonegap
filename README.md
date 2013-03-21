@@ -1,4 +1,3 @@
-
 **mediawikixml2meteor2phonegap** turns a MediaWiki XML dump into a
 Meteor app and consequently into a Phonegap app.  Requires
 https://github.com/guaka/meteor-phonegap
@@ -10,10 +9,11 @@ This is a work in progress with running code.
 Mainly check `build.sh`
 
 
-Looks a bit like http://hitchwiki.meteor.com/
+Examples
+--------
 
-Expect examples in play.google.com any day now.
+* http://hitchwiki.meteor.com/ and https://play.google.com/store/apps/details?id=io.cordova.cordovahitchwikimeteorcom
 
 
 
-Currently GPLv2+ for compatability with MediaWiki.
+Currently GPLv2+ for compatibility with MediaWiki.
