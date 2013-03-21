@@ -25,7 +25,7 @@ Meteor.startup ->
     page = 'Main Page'
   Session.set 'currentTitle', page
 
-  json = jsondump.mediawiki
+  json = jsondump
   Session.set 'jsonChanged', Meteor.uuid()
 
   css = document.createElement "style"
