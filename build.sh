@@ -24,7 +24,7 @@ if [ ! -f dumps/hitchwiki.xml ]; then
 fi
 
 if [ ! -f dumps/$WIKI.js ]; then
-    ./xml2json.js $WIKI
+    ./xml2json.coffee $WIKI
 fi
 
 cp dumps/$WIKI.js meteor/client/dump.js
