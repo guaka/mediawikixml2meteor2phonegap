@@ -1,0 +1,27 @@
+{
+  "name": "mediawikixml2meteor2phonegap",
+  "preferGlobal": true,
+  "version": "0.1.0",
+  "author": "guaka <kasper.souren@gmail.com>",
+  "description": "turn MediaWiki XML dumps into a Meteor apps into Phonegap",
+  "contributors": [ 
+    {
+      "name": "Mikael Korpela",
+      "email": "mikael@ihminen.org"
+    } 
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guaka/mediawikixml2meteor2phonegap.git"
+  },
+  "keywords": [
+    "mediawiki",
+    "meteor",
+    "phonegap"
+  ],
+  "dependencies" : {
+    "underscore" : "*",
+    "xml2json"   : "*"
+  },
+  "license": "GPL"
+}
