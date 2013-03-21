@@ -1,0 +1,16 @@
+
+<template name="page">
+  <div style="float: right">
+    <input id="jumpTo" type="text" placeholder="Jump to page" />
+  </div>
+
+  <h1><a href="#Main_Page">{{siteName}}</a></h1>
+  <h2>{{title}}</h2>
+  <div id="content">
+    {{content}}
+  </div>
+
+  <div id="footer" class="navbar navbar-fixed-bottom nav-collapse navbar-inverse">
+    built by <a href="http://guaka.org/">guaka</a> with <a href="https://github.com/guaka/mediawikixml2meteor2phonegap">mediawikixml2meteor2phonegap</a>
+  </div>
+</template>
