@@ -9,16 +9,14 @@ h1 {
   padding: 0;
 }
 
-#mcontent {
-  padding-bottom: 10px;
-  border-bottom: 1px dotted #888;
+/* override vector.css */
+body div#content {
+  margin-left: 0;
 }
 
 
 #footer {
   margin-top: 10px;
-  float: right;
-  font-size: 85%;
 }
 
 noinclude {
