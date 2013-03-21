@@ -22,17 +22,17 @@ articleParse = (text) ->
 
   text = text.replace /^\#/gm, '<li>'
 
-  # ditch images
+  # Ditch images
   text = text.replace /\[\[(File|Image):(.+?)\|(.+?)\]\]/g, ''
 
-  # don't match [[link|text]]
-  text = text.replace /\[\[([^|]+?)\]\]/g, '<a href="#$1" class="mw-redirect">$1</a>'
+  # Don't match [[link|text]]
+  text = text.replace /\[\[([^|]+?)\]\]/g, '<a href="#$1">$1</a>'
 
   # and now match [[link|text]]
-  text = text.replace /\[\[(.+?)\|(.+?)\]\]/g, '<a href="#$1" class="mw-redirect">$2</a>'
+  text = text.replace /\[\[(.+?)\|(.+?)\]\]/g, '<a href="#$1">$2</a>'
 
-  # hyperlinks
-  text = text.replace /\[(.+?) (.+?)\]/g, '<a href="$1">$2</a>'
+  # Hyperlinks
+  text = text.replace /\[(.+?) (.+?)\]/g, '<a class="external" href="$1">$2</a>'
 
   # bold
   text = text.replace /\'\'\'(.*?)\'\'\'/g, '<strong>$1</strong>'
