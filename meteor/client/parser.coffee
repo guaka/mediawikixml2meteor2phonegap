@@ -9,7 +9,7 @@ articleParse = (text) ->
   text = text.replace /\{\{(.+?)\}\}/g, (all, arg1) ->
     t = getPageText "Template:" + ucfirst arg1
     if not t?
-      'Template:' + arg1
+      ''  # Templates can be empty. e.g. IsIn on Hitchwiki
     else
       # DANGER: infinite template loop
       articleParse t
