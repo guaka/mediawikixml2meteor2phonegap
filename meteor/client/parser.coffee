@@ -1,15 +1,18 @@
 
 articleParse = (text) ->
 
-  # {{NUMBEROFARTICLES}}
+  # First parse "constants"
   text = text.replace /\{\{NUMBEROFARTICLES\}\}/, '~' + (_.filter json.page, (p) -> p.ns == 0 and p.revision.text.bytes > 100).length
   text = text.replace /\{\{NUMBEROFUSERS\}\}/, '~' + (_.filter json.page, (p) -> p.ns == 10).length
 
+  # Then templates
   text = text.replace /\{\{(.+?)\}\}/g, (all, arg1) ->
     t = getPageText "Template:" + ucfirst arg1
     if not t?
-      t = 'Template:' + arg1
-    t
+      'Template:' + arg1
+    else
+      # DANGER: infinite template loop
+      articleParse t
 
   # text = text.replace /<noinclude>.*?<\/noinclude>/gmi, ''  # doesn't work, hacky fix in css
 
