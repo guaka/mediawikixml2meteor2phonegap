@@ -2,9 +2,10 @@
 articleParse = (text) ->
 
   # {{NUMBEROFARTICLES}}
-  text = text.replace /\{\{NUMBEROFARTICLES\}\}/, (_.filter json.page, (p) -> p.ns == '0' and p.revision.text.length > 100).length
+  text = text.replace /\{\{NUMBEROFARTICLES\}\}/, '~' + (_.filter json.page, (p) -> p.ns == 0 and p.revision.text.bytes > 100).length
+  text = text.replace /\{\{NUMBEROFUSERS\}\}/, '~' + (_.filter json.page, (p) -> p.ns == 10).length
 
-  text = text.replace /\{\{(.+?)\}\}/, (all, arg1) ->
+  text = text.replace /\{\{(.+?)\}\}/g, (all, arg1) ->
     t = getPageText "Template:" + ucfirst arg1
     if not t?
       t = 'Template:' + arg1
