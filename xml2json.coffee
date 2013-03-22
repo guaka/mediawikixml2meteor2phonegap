@@ -15,29 +15,35 @@ fs.readFile "dumps/" + wiki + ".xml", (err, data) ->
 
   console.log "xml size:", data.length
 
-  json = parser.toJson xml,
-    sanitize: false
-    trim: false
+  # E.g. English Wikivoyage
+  if data.length < 100000000
+    json_out = parser.toJson xml,
+      sanitize: false
+      trim: false
 
-  js = JSON.parse json
-  jsOut = {}
-  jsOut.siteinfo = js.mediawiki.siteinfo
+  # We can make it smaller
+  else
+    json = parser.toJson xml,
+      sanitize: false
+      trim: false
 
-  console.log 'all pages: ',  js.mediawiki.page.length
+    js = JSON.parse json
+    jsOut = {}
+    jsOut.siteinfo = js.mediawiki.siteinfo
 
-  jsOut.page = _.filter js.mediawiki.page, (p) ->
-    # Main, MediaWiki, Template or Category
-    _.contains [0, 8, 10, 14], p.ns
+    console.log 'all pages: ',  js.mediawiki.page.length
 
-  console.log 'ns 0, 10, 14: ',  jsOut.page.length
+    jsOut.page = _.filter js.mediawiki.page, (p) ->
+      # Main, MediaWiki, Template or Category
+      _.contains [0, 8, 10, 14], p.ns
 
-  json_out = JSON.stringify jsOut
+    console.log 'ns 0, 10, 14: ',  jsOut.page.length
 
-  console.log "json size:", json_out.length
+    json_out = JSON.stringify jsOut
 
-  js = "var jsondump = " + json_out
+    console.log "json size:", json_out.length
 
   dir = 'dumps/'
-  fs.writeFile dir + wiki + ".js", js, (err) ->
+  fs.writeFile dir + wiki + ".js", "var jsondump = " + json_out, (err) ->
     throw err  if err
     console.log "saved in ", dir
