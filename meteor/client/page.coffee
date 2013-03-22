@@ -5,16 +5,29 @@ Template.page.siteName = ->
 
 
 
+pagesInCat = (cat) ->
+  console.log 'Category:', cat
+  pages = _.filter json.page, (p) -> p.revision.text.$t.match ('Category:' + cat)
+  titles = _.pluck pages, 'title'
+  titles.sort()
+  links = _.map titles, (t) -> '[[' + t + ']]'
+  "*" + links.join("\n*")
+
+
 Template.page.content = ->
   if json?
     title = Session.get 'currentTitle'
-    value = getPageText(title)
+    value = getPageText title
   if value?
     redirect = value.match /\#redirect \[\[(.+?)\]\]/i
     if redirect
       Session.set 'currentTitle', redirect[1]
     else
-      unsafe articleParse value
+      if m = title.match /Category:(.+)/
+        console.log m
+        unsafe articleParse (pagesInCat(m[1]) + "\n\n" + value)
+      else
+        unsafe articleParse value
   else
     'no page found, or still processing...'
 
