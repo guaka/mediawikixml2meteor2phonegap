@@ -27,7 +27,7 @@ Examples
 --------
 
 * http://hitchwiki.meteor.com/ and https://play.google.com/store/apps/details?id=io.cordova.cordovahitchwikimeteorcom
-
+* (Dutch Wikivoyage)[http://nlwikivoyage.meteor.com/]
 
 
 Currently GPLv2+ for compatibility with MediaWiki.
