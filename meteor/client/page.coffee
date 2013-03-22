@@ -25,7 +25,8 @@ Template.page.siteName = ->
   Session.set 'sitename', json?.siteinfo.sitename
   Session.get 'sitename'
 
-
+Template.page.mainpage = ->
+  Session.get 'mainpage'
 
 
 

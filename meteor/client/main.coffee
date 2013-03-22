@@ -11,12 +11,11 @@ addCssFromWiki = (page) ->
 
 
 Meteor.startup ->
-  page = location.hash.slice(1)
-  if page == ''
-    page = 'Main Page'
-  Session.set 'currentTitle', page
 
-  json = jsondump
+  if jsondump.hasOwnProperty 'mediawiki'
+    json = jsondump.mediawiki
+  else
+    json = jsondump
   Session.set 'jsonChanged', Meteor.uuid()
 
   # TODO: ifExists
@@ -25,3 +24,10 @@ Meteor.startup ->
   addCssFromWiki 'MediaWiki:Common.css'
 
   $('#search').focus()
+
+  Session.set 'mainpage', json.siteinfo.base.split('/').slice(-1)[0]
+
+  page = location.hash.slice(1)
+  if page == ''
+    page = Session.get 'mainpage'
+  Session.set 'currentTitle', page
