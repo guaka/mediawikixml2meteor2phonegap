@@ -3,23 +3,6 @@
 json = null
 
 
-getPage = (title) ->
-  console.log title
-  title = title.replace /_/g, ' '
-  page = _.find json.page, (p) ->
-    p.title == title
-
-
-getPageText = (title) ->
-  getPage(title)?.revision.text.$t
-
-
-unsafe = (text) ->
-  if text?
-    new Handlebars.SafeString text
-
-
-
 addCssFromWiki = (page) ->
   css = document.createElement "style"
   css.type = "text/css"
