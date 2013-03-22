@@ -1,4 +1,11 @@
 
+
+namespace = (ns) ->
+  for n in json.siteinfo.namespaces.namespace
+    if n.key is ns
+      return n.$t
+
+
 getPage = (title) ->
   console.log title
   title = title.replace /_/g, ' '
@@ -11,8 +18,7 @@ getPageText = (title) ->
 
 
 pagesInCat = (cat) ->
-  console.log 'Category:', cat
-  pages = _.filter json.page, (p) -> p.revision.text.$t.match ('Category:' + cat)
+  pages = _.filter json.page, (p) -> p.revision.text.$t.match (namespace(14) + ':' + cat)
   titles = _.pluck pages, 'title'
   titles.sort()
   links = _.map titles, (t) -> '[[' + t + ']]'
@@ -39,6 +45,7 @@ Template.page.content = ->
     if redirect
       Session.set 'currentTitle', redirect[1]
     else
+      # TODO: re_cat = new RegExp namespace(14) + ':(.+)'
       if m = title.match /Category:(.+)/
         console.log m
         unsafe articleParse (pagesInCat(m[1]) + "\n\n" + value)

@@ -1,8 +1,10 @@
 
+
+
 articleParse = (text) ->
 
   # First parse "constants"
-  text = text.replace /\{\{NUMBEROFARTICLES\}\}/, '~' + (_.filter json.page, (p) -> p.ns == 0 and p.revision.text.bytes > 100).length
+  text = text.replace /\{\{NUMBEROFARTICLES\}\}/, '~' + (_.filter json.page, (p) -> p.ns == 0 and p.revision.text.bytes > 100).lengte
   text = text.replace /\{\{NUMBEROFUSERS\}\}/, '~' + (_.filter json.page, (p) -> p.ns == 10).length
 
   # Then templates
@@ -24,6 +26,7 @@ articleParse = (text) ->
 
   # Ditch images
   # TODO: handle [[links]] inside image descriptions, such as e.g. hitch:Paris#Sleeping in Paris
+  # namespace(6)
   text = text.replace /\[\[(File|Image):(.+?)\|(.+?)\]\]/gm, ''
 
   # Don't match [[link|text]]
