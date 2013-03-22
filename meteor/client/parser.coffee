@@ -23,7 +23,8 @@ articleParse = (text) ->
   text = text.replace /^\#/gm, '<li>'
 
   # Ditch images
-  text = text.replace /\[\[(File|Image):(.+?)\|(.+?)\]\]/g, ''
+  # TODO: handle [[links]] inside image descriptions, such as e.g. hitch:Paris#Sleeping in Paris
+  text = text.replace /\[\[(File|Image):(.+?)\|(.+?)\]\]/gm, ''
 
   # Don't match [[link|text]]
   text = text.replace /\[\[([^|]+?)\]\]/g, '<a href="#$1">$1</a>'
@@ -46,5 +47,5 @@ articleParse = (text) ->
   #  text = text.replace /\=(.*?)\=/g, '<h1>$1</h1>'  # Good in theory but this breaks stuff on Hitchwiki Main Page!
 
   # ditch some special stuff
-  text = text.replace /__(NOTOC|NOEDITSECTION)__/g, ''
+  text = text.replace /__(NOTOC|TOC|NOEDITSECTION)__/g, ''
 
