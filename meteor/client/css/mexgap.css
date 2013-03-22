@@ -25,7 +25,7 @@ input#jumpTo {
 }
 
 /* override vector.css */
-div#content {
+body div#content {
   margin-left: 0;
 }
 
