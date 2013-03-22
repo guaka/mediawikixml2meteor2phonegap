@@ -26,8 +26,8 @@ fs.readFile "dumps/" + wiki + ".xml", (err, data) ->
   console.log 'all pages: ',  js.mediawiki.page.length
 
   jsOut.page = _.filter js.mediawiki.page, (p) ->
-    # Main, Template or Category
-    _.contains [0, 10, 14], p.ns
+    # Main, MediaWiki, Template or Category
+    _.contains [0, 8, 10, 14], p.ns
 
   console.log 'ns 0, 10, 14: ',  jsOut.page.length
 
