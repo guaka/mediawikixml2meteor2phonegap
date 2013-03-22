@@ -43,7 +43,7 @@ articleParse = (text) ->
   text = text.replace /\=\=\=\=(.*?)\=\=\=\=/g, '<h4>$1</h4>'
   text = text.replace /\=\=\=(.*?)\=\=\=/g, '<h3>$1</h3>'
   text = text.replace /\=\=(.*?)\=\=/g, '<h2>$1</h2>'
-  text = text.replace /\=(.*?)\=/g, '<h1>$1</h1>'
+  #  text = text.replace /\=(.*?)\=/g, '<h1>$1</h1>'  # Good in theory but this breaks stuff on Hitchwiki Main Page!
 
   # ditch some special stuff
   text = text.replace /__(NOTOC|NOEDITSECTION)__/g, ''
