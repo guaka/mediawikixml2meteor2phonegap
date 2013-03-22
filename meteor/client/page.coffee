@@ -1,7 +1,8 @@
 
 Template.page.siteName = ->
   Session.get 'jsonChanged'  # force reactivity
-  json?.siteinfo.sitename
+  Session.set 'sitename', json?.siteinfo.sitename
+  Session.get 'sitename'
 
 
 
@@ -32,7 +33,9 @@ Template.page.content = ->
     'no page found, or still processing...'
 
 Template.page.title = ->
-  Session.get('currentTitle')?.replace(/[%20|_]/g, ' ')
+  title = Session.get('currentTitle')?.replace(/[%20|_]/g, ' ')
+  document.title = title + ' | ' + Session.get('sitename') + ' Meteorized'
+  title
 
 
 Template.page.events
@@ -45,5 +48,29 @@ Template.page.events
 
   'keydown #jumpTo': (evt) ->
     if evt.keyCode is 13
-      Session.set 'currentTitle', ucfirst $('#jumpTo').val()
+      search $('#jumpTo').val()
       $('#jumpTo').val ''
+
+
+t = null
+search = (s) ->
+  found = _.find json.page, (p) -> p.title is s
+  if found
+    Session.set 'currentTitle', s
+  else
+    found = _.find json.page, (p) -> p.title.toLowerCase() is s.toLowerCase()
+    console.log found
+    if found
+      Session.set 'currentTitle', found.title
+    else
+      Session.set 'currentTitle', 'search:' + s
+
+# This one doesn't work yet...
+matches = (s) ->
+  matches = _.map json.page, (p) ->
+    re = new RegExp s, 'i'
+    (p.title + '').match re
+  _.filter matches, (m) -> m
+
+
+
