@@ -46,10 +46,10 @@ Template.page.events
     Session.set 'currentTitle', ucfirst title
     window.scrollTo 0, 0
 
-  'keydown #jumpTo': (evt) ->
+  'keydown #search': (evt) ->
     if evt.keyCode is 13
-      search $('#jumpTo').val()
-      $('#jumpTo').val ''
+      search $('#search').val()
+      $('#search').val ''
 
 
 t = null

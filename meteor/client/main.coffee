@@ -41,3 +41,4 @@ Meteor.startup ->
   addCssFromWiki 'MediaWiki:Monobook.css'
   addCssFromWiki 'MediaWiki:Common.css'
 
+  $('#search').focus()
