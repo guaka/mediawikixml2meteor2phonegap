@@ -19,6 +19,14 @@ unsafe = (text) ->
     new Handlebars.SafeString text
 
 
+
+addCssFromWiki = (page) ->
+  css = document.createElement "style"
+  css.type = "text/css"
+  css.innerHTML = getPageText page
+  document.body.appendChild css
+
+
 Meteor.startup ->
   page = location.hash.slice(1)
   if page == ''
@@ -28,8 +36,8 @@ Meteor.startup ->
   json = jsondump
   Session.set 'jsonChanged', Meteor.uuid()
 
-  css = document.createElement "style"
-  css.type = "text/css"
-  css.innerHTML = getPageText('MediaWiki:Common.css')
-  document.body.appendChild(css)
+  # TODO: ifExists
+  addCssFromWiki 'MediaWiki:Vector.css'
+  addCssFromWiki 'MediaWiki:Monobook.css'
+  addCssFromWiki 'MediaWiki:Common.css'
 
