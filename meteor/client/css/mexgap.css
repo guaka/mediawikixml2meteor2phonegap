@@ -1,5 +1,5 @@
 body {
-	max-width: 800px;
+	/* max-width: 800px; */ /* not sure about max-width */
 	margin: 0 auto 0 auto;
 	text-align: justify;
 }
@@ -10,49 +10,24 @@ body {
   font-family: sans-serif;
 }
 
-h1,h2,h3,h4,h5 {
-	text-shadow: 1px 1px 2px rgba(100, 100, 100, 0.2);
-	border-bottom: 1px solid #EEE;
-}
 
 input#jumpTo:before {
-	content: 'Search';
+  content: 'Search';
 }
 
 input#jumpTo {
-	border: 1px solid black;
-	box-shadow: 1px 1px 2px rgba(100, 100, 100, 0.2);
+  border: 1px solid black;
+  box-shadow: 1px 1px 2px rgba(100, 100, 100, 0.2);
 }
 
-/* override vector.css */
-body div#content {
-  margin-left: 0;
-}
 
-a {
-	text-decoration: none;
-	color: #0BF;
-}
 
-a:hover {
-	color: blue;
-}
-
-a.external {
-	color: green;
-	padding: 0;
-}
-
-div.frontpage_news strong:before {
-	display: block;
-	content: ' ';
-}
-
-#footer {
+body div#footer {
   margin-top: 10px;
   position: fixed;
   bottom: 0px;
   right: 0px;
+  margin-left: 0px;
   text-align: right;
   padding: 4px;
   background-color: #EEE;
@@ -60,6 +35,41 @@ div.frontpage_news strong:before {
   font-size: 9pt;
 }
 
+
+/* HTML hack */
 noinclude {
   display: none;
+}
+
+
+
+/* Override vector.css */
+body div#content {
+  margin-left: 0;
+}
+
+
+/* Most of this should come from MediaWiki:* or standard css */
+h1,h2,h3,h4,h5 {
+  text-shadow: 1px 1px 2px rgba(100, 100, 100, 0.2);
+  border-bottom: 1px solid #EEE;
+}
+
+a {
+  text-decoration: none;
+  color: #0BF;
+}
+
+a:hover {
+  color: blue;
+}
+
+a.external {
+  color: green;
+  padding: 0;
+}
+
+div.frontpage_news strong:before {
+  display: block;
+  content: ' ';
 }
