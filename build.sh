@@ -39,5 +39,7 @@ sleep 5
 # And now do something phonegappy.
 # This will only work if oyu have meteor-phonegap installed in this specific directory.
 # 
-cd ~/code/meteor-phonegap
-./meteor2cordova.sh $WIKI.meteor.com
+if [ -d ~/code/meteor-phonegap ]; then
+	cd ~/code/meteor-phonegap
+	./meteor2cordova.sh $WIKI.meteor.com
+fi
