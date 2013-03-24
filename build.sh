@@ -13,33 +13,34 @@ WIKI=${1-hitchwiki}
 
 cd $(dirname $0)
 
-mkdir -p dumps
+mkdir -p $WIKI
+cd $WIKI
 
-if [ ! -f dumps/hitchwiki.xml ]; then
+if [ ! -f dump.xml ]; then
     echo 'Downloading hitchwiki dump'
-    cd dumps
     wget http://hitchwiki.org/dumps/current-en.xml
-    mv current-en.xml hitchwiki.xml
+    mv current-en.xml dump.xml
     cd ..
 fi
 
-if [ ! -f dumps/$WIKI.js ]; then
-    ./xml2json.coffee $WIKI
+if [ ! -f dump.js ]; then
+    ../xml2json.coffee
 fi
 
-cp dumps/$WIKI.js meteor/client/dump.js
+cp dump.js ../meteor/client/dump.js
 
-cd meteor
+cd ../meteor
 meteor deploy $WIKI.meteor.com
 
+cd ../$WIKI
 echo Waiting a bit for meteor servers to settle down.
 sleep 5
 
 #
 # And now do something phonegappy.
-# This will only work if oyu have meteor-phonegap installed in this specific directory.
+# This will only work if you have meteor-phonegap installed in this specific directory.
 # 
 if [ -d ~/code/meteor-phonegap ]; then
-	cd ~/code/meteor-phonegap
-	./meteor2cordova.sh $WIKI.meteor.com
+    #~/code/meteor-phonegap/meteor2cordova.sh $WIKI.meteor.com
+    #~/code/meteor-phonegap/signapk.sh bikeshedinc
 fi

@@ -10,7 +10,7 @@ wiki = "hitchwiki"  unless wiki
 
 console.log "Processing", wiki
 
-fs.readFile "dumps/" + wiki + ".xml", (err, data) ->
+fs.readFile "dump.xml", (err, data) ->
   xml = data
 
   console.log "xml size:", data.length
@@ -43,7 +43,6 @@ fs.readFile "dumps/" + wiki + ".xml", (err, data) ->
 
     console.log "json size:", json_out.length
 
-  dir = 'dumps/'
-  fs.writeFile dir + wiki + ".js", "var jsondump = " + json_out, (err) ->
+  fs.writeFile "dump.js", "var jsondump = " + json_out, (err) ->
     throw err  if err
-    console.log "saved in ", dir
+    console.log "saved dump.js"
