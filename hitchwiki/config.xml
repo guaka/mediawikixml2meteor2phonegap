@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.cordovahitchwikimeteorcom" version="2.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Hitchwiki | world wide guide to hitchhiking</name>
+<widget id="io.cordova.hitchwiki.meteor.com" version="2.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Hitchwiki - the Hitchhiking Wiki</name>
     <description>
       Hitchwiki app for offline browsing
     </description>
-    <author email="contact@hitchiki.org" href="http://hitchwiki.org/">
+    <author email="contact@hitchwiki.org" href="http://hitchwiki.org/">
       Hitchwiki team
     </author>
     <icon height="512" src="res/icon/cordova_512.png" width="512" />
