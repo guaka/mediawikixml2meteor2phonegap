@@ -30,9 +30,14 @@ articleParse = (text) ->
   text = text.replace /\[\[(File|Image):(.+?)\|(.+?)\]\]/gm, ''
 
   # interwiki
-  text = text.replace /\[\[(..)\:(.*?)\]\]/g, '<div class="interwiki"><a class="interwiki" href="/$1/$2"><span>$1</span>$2</a></div>iw'
-  text = text.replace /<\/div>iw\s*<div class="interwiki">/g, ''
+  text = text.replace /\[\[(..)\:(.*?)\]\]/g, '<div class="interwiki"><span>International</span><a href="/$1/$2"><span>$1</span>$2</a></div>iw'
+  text = text.replace /<\/div>iw\s*<div class="interwiki"><span>International<\/span>/g, ''
   text = text.replace /<\/div>iw/, '</div>'
+
+  # interwiki
+  text = text.replace /\[\[Category\:([^|]*?)\]\]/g, '<div class="categories"><span>Categories</span><a href="#Category:$1">$1</a></div>cat'
+  text = text.replace /<\/div>cat\s*<div class="categories"><span>Categories<\/span>/g, ''
+  text = text.replace /<\/div>cat/, '</div>'
 
   # Don't match [[link|text]]
   text = text.replace /\[\[([^|]+?)\]\]/g, '<a href="#$1">$1</a>'
