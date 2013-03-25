@@ -36,7 +36,7 @@ articleParse = (text) ->
 
   # interwiki
   text = text.replace /\[\[Category\:([^|]*?)\]\]/g, '<div class="categories"><span>Categories</span><a href="#Category:$1">$1</a></div>cat'
-  text = text.replace /<\/div>cat\s*<div class="categories"><span>Categories<\/span>/g, ''
+  text = text.replace /<\/div>cat[\s\t\r\n]*<div class="categories"><span>Categories<\/span>/g, ''
   text = text.replace /<\/div>cat/, '</div>'
 
   # Don't match [[link|text]]
