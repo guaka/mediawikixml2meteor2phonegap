@@ -127,3 +127,8 @@ div.categories span, div.interwiki span {
 	padding 0 3px 0 3px;
 }
 
+.toccolours {
+	border: 1px solid #666;
+	margin: 3px;
+	padding: 2px;
+}

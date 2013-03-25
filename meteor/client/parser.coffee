@@ -29,12 +29,15 @@ articleParse = (text) ->
   # namespace(6)
   text = text.replace /\[\[(File|Image):(.+?)\|(.+?)\]\]/gm, ''
 
-  # interwiki
+  # Trying to move categories to the end
+  #text = text.replace /\[\[Category\:([^|]*?)\]\](.+*)/gm, '$2[[Category:$1]]'
+
+  # Interwiki
   text = text.replace /\[\[(..)\:(.*?)\]\]/g, '<div class="interwiki"><span>International</span><a href="/$1/$2"><span>$1</span>$2</a></div>iw'
   text = text.replace /<\/div>iw\s*<div class="interwiki"><span>International<\/span>/g, ''
   text = text.replace /<\/div>iw/, '</div>'
 
-  # interwiki
+  # Categories 
   text = text.replace /\[\[Category\:([^|]*?)\]\]/g, '<div class="categories"><span>Categories</span><a href="#Category:$1">$1</a></div>cat'
   text = text.replace /<\/div>cat[\s\t\r\n]*<div class="categories"><span>Categories<\/span>/g, ''
   text = text.replace /<\/div>cat/, '</div>'
@@ -46,6 +49,7 @@ articleParse = (text) ->
   text = text.replace /\[\[(.+?)\|(.+?)\]\]/g, '<a href="#$1">$2</a>'
 
   # Hyperlinks
+  text = text.replace /\[([^ \]]+?)\]/g, '<a class="external" href="$1">$1</a>'
   text = text.replace /\[(.+?) (.+?)\]/g, '<a class="external" href="$1">$2</a>'
 
   # Tables
