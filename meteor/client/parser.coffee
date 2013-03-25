@@ -48,6 +48,11 @@ articleParse = (text) ->
   # Hyperlinks
   text = text.replace /\[(.+?) (.+?)\]/g, '<a class="external" href="$1">$2</a>'
 
+  # Tables
+  text = text.replace /\{\|([^|]*?)\|([.\s\S]+?)\|\}/gm, '<table $1><tr><td>$2</td></tr></table>'
+  text = text.replace /\|\-/g, '</tr><tr>'
+  text = text.replace /\|/g, '</td><td>'
+
   # bold
   text = text.replace /\'\'\'(.*?)\'\'\'/g, '<strong>$1</strong>'
   # and italic
