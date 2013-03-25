@@ -29,6 +29,11 @@ articleParse = (text) ->
   # namespace(6)
   text = text.replace /\[\[(File|Image):(.+?)\|(.+?)\]\]/gm, ''
 
+  # interwiki
+  text = text.replace /\[\[(..)\:(.*?)\]\]/g, '<div class="interwiki"><a class="interwiki" href="/$1/$2"><span>$1</span>$2</a></div>iw'
+  text = text.replace /<\/div>iw\s*<div class="interwiki">/g, ''
+  text = text.replace /<\/div>iw/, '</div>'
+
   # Don't match [[link|text]]
   text = text.replace /\[\[([^|]+?)\]\]/g, '<a href="#$1">$1</a>'
 

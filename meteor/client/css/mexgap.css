@@ -46,6 +46,8 @@ noinclude, gallery {
 /* Override vector.css */
 body div#content {
   margin-left: 0;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 
@@ -73,3 +75,47 @@ div.frontpage_news strong:before {
   display: block;
   content: ' ';
 }
+
+div.interwiki {
+	border: 1px solid #666;
+	border-radius: 5px;
+	min-height: 30px;
+	overflow: auto;
+	margin: 10px 0 10px 0;
+	padding: 3px;
+}
+
+div.interwiki a {
+	border: 1px solid #666;
+	box-shadow: 1px 1px 2px rgba(100, 100, 100, 0.5);
+	border-radius: 3px;
+	margin: 3px;
+	float: left;
+	padding: 0 3px 0 0;
+	height: 24px;
+	overflow: hidden;
+
+	transition: all 400ms;
+	-moz-transition: all 400ms; /* Firefox 4 */
+	-webkit-transition: all 400ms; /* Safari and Chrome */
+	-o-transition: all 400ms; /* Opera */
+}
+div.interwiki a span {
+	background-color: #DDD;
+	color: white;
+	font-weight: bold;
+	margin: 0 3px 0 0;
+	height: 30px;
+	width: 25px;
+	display: inline-block;
+	text-align: center;
+}
+div.interwiki a:hover {
+	text-decoration: none;
+	border: 1px solid blue;
+}
+div.interwiki a:hover span {
+	background-color: #0BF;
+}
+
+
