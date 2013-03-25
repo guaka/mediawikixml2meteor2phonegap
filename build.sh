@@ -20,7 +20,6 @@ if [ ! -f dump.xml ]; then
     echo 'Downloading hitchwiki dump'
     wget http://hitchwiki.org/dumps/current-en.xml
     mv current-en.xml dump.xml
-    cd ..
 fi
 
 if [ ! -f dump.js ]; then
@@ -41,6 +40,6 @@ sleep 5
 # This will only work if you have meteor-phonegap installed in this specific directory.
 # 
 if [ -d ~/code/meteor-phonegap ]; then
-    #~/code/meteor-phonegap/meteor2cordova.sh $WIKI.meteor.com
-    #~/code/meteor-phonegap/signapk.sh bikeshedinc
+    ~/code/meteor-phonegap/meteor2cordova.sh $WIKI.meteor.com
+    ~/code/meteor-phonegap/signapk.sh bikeshedinc
 fi
