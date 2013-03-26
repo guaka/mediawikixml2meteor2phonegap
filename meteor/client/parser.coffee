@@ -25,9 +25,10 @@ articleParse = (text) ->
   text = text.replace /^\#/gm, '<li>'
 
   # Ditch images
-  # TODO: handle [[links]] inside image descriptions, such as e.g. hitch:Paris#Sleeping in Paris
   # namespace(6)
-  text = text.replace /\[\[(File|Image):(.+?)\|(.+?)\]\]/gm, ''
+  # Do we want to include external images? This regex returns the following parameters: Type=$1; Filename=$2; Params=$3; Caption=$5'
+  text = text.replace /\[\[(File|Image):([^\|\]\[]+)((\|[^\|\]]+)*\|)(([^\[\]|]*?\[\[.+?\]\][^\]\[|]*?)+)\]\]/g, ''
+  text = text.replace /\[\[(File|Image):([^\|\]\[]+)((\|[^\|\]\[]+)*)([^\[\]|]*?)\]\]/g, ''
 
   # Trying to move categories to the end
   #text = text.replace /\[\[Category\:([^|]*?)\]\](.+*)/gm, '$2[[Category:$1]]'
@@ -42,7 +43,7 @@ articleParse = (text) ->
   text = text.replace /<\/div>cat[\s\t\r\n]*<div class="categories"><span>Categories<\/span>/g, ''
   text = text.replace /<\/div>cat/, '</div>'
 
-  # Don't match [[link|text]]
+  # Match [[link]]
   text = text.replace /\[\[([^|]+?)\]\]/g, '<a href="#$1">$1</a>'
 
   # and now match [[link|text]]
