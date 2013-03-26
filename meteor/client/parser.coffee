@@ -1,7 +1,11 @@
 
 
 
-articleParse = (text) ->
+articleParse = (text, depth = 0) ->
+
+  # avoid infinite loops when parsing sub-templates
+  if depth >= 5
+    return text
 
   # First parse "constants"
   text = text.replace /\{\{NUMBEROFARTICLES\}\}/, '~' + (_.filter json.page, (p) -> p.ns == 0 and p.revision.text.bytes > 100).length
@@ -13,8 +17,7 @@ articleParse = (text) ->
     if not t?
       ''  # Templates can be empty. e.g. IsIn on Hitchwiki
     else
-      # DANGER: infinite template loop
-      articleParse t
+      articleParse t, depth+1
 
   # text = text.replace /<noinclude>.*?<\/noinclude>/gmi, ''  # doesn't work, hacky fix in css
 
