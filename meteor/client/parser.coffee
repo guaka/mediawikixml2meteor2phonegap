@@ -38,10 +38,10 @@ articleParse = (text, depth = 0) ->
   # Trying to move categories to the end
   #text = text.replace /\[\[Category\:([^|]*?)\]\](.+*)/gm, '$2[[Category:$1]]'
 
-  # Interwiki
-  text = text.replace /\[\[(..)\:(.*?)\]\]/g, '<div class="interwiki"><span>International</span><a href="/$1/$2"><span>$1</span>$2</a></div>iw'
-  text = text.replace /<\/div>iw\s*<div class="interwiki"><span>International<\/span>/g, ''
-  text = text.replace /<\/div>iw/, '</div>'
+  # Language-Interwiki
+  text = text.replace /\[\[(..)\:(.*?)\]\]/g, '<div class="interwiki"><span>International</span><a href="/$1/$2"><span>$1</span>$2</a></div>iwl'
+  text = text.replace /<\/div>iwl\s*<div class="interwiki"><span>International<\/span>/g, ''
+  text = text.replace /<\/div>iwl/, '</div>'
 
   # Categories 
   text = text.replace /\[\[Category\:([^|]*?)\]\]/g, '<div class="categories"><span>Categories</span><a href="#Category:$1">$1</a></div>cat'
