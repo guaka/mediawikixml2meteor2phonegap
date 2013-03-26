@@ -26,8 +26,10 @@ articleParse = (text) ->
 
   # Ditch images
   # namespace(6)
-  # Do we want to include external images? This regex returns the following parameters: Type=$1; Filename=$2; Params=$3; Caption=$5'
+  # Do we want to include external images? Both regexes returns the following parameters: Type=$1; Filename=$2; Params=$3; Caption=$5'
+  # With links inside the caption:
   text = text.replace /\[\[(File|Image):([^\|\]\[]+)((\|[^\|\]]+)*\|)(([^\[\]|]*?\[\[.+?\]\][^\]\[|]*?)+)\]\]/g, ''
+  # Plaintext or empty caption:
   text = text.replace /\[\[(File|Image):([^\|\]\[]+)((\|[^\|\]\[]+)*)([^\[\]|]*?)\]\]/g, ''
 
   # Trying to move categories to the end
@@ -62,6 +64,8 @@ articleParse = (text) ->
   text = text.replace /\'\'\'(.*?)\'\'\'/g, '<strong>$1</strong>'
   # and italic
   text = text.replace /\'\'(.*?)\'\'/g, '<em>$1</em>'
+
+  text = text.replace /\n\n/gm, '<br />'
 
   # headings
   text = text.replace /\=\=\=\=(.*?)\=\=\=\=/g, '<h4>$1</h4>'
