@@ -36,17 +36,15 @@ articleParse = (text, depth = 0) ->
   text = text.replace /\[\[(File|Image):([^\|\]\[]+)((\|[^\|\]\[]+)*)([^\[\]|]*?)\]\]/g, ''
 
   # Trying to move categories to the end
-  #text = text.replace /\[\[Category\:([^|]*?)\]\](.+*)/gm, '$2[[Category:$1]]'
-
-  # Language-Interwiki
-  text = text.replace /\[\[(..)\:(.*?)\]\]/g, '<div class="interwiki"><span>International</span><a href="/$1/$2"><span>$1</span>$2</a></div>iwl'
-  text = text.replace /<\/div>iwl\s*<div class="interwiki"><span>International<\/span>/g, ''
-  text = text.replace /<\/div>iwl/, '</div>'
+  #text = text.replace /\[\[Category\:([^|]+?)\]\](.+*)/gm, '$2[[Category:$1]]'
 
   # Categories 
-  text = text.replace /\[\[Category\:([^|]*?)\]\]/g, '<div class="categories"><span>Categories</span><a href="#Category:$1">$1</a></div>cat'
-  text = text.replace /<\/div>cat[\s\t\r\n]*<div class="categories"><span>Categories<\/span>/g, ''
-  text = text.replace /<\/div>cat/, '</div>'
+  categories = text.match /\[\[Category\:([^|]*?)\]\]/g
+  text = text.replace /\[\[Category\:([^|]*?)\]\]/g, '' 
+
+  # Language-Interwiki
+  interwiki = text.match /\[\[(..)\:([^|]*?)\]\]/g
+  text = text.replace /\[\[(..)\:([^|]*?)\]\]/g, '' 
 
   # Match [[link]]
   text = text.replace /\[\[([^|]+?)\]\]/g, '<a href="#$1">$1</a>'
@@ -78,4 +76,14 @@ articleParse = (text, depth = 0) ->
 
   # ditch some special stuff
   text = text.replace /__(NOTOC|TOC|NOEDITSECTION)__/g, ''
+
+  text = text + '<div class="categories"><span>Categories</span>'
+  for cat in categories
+    text = text + cat.replace /\[\[Category\:([^|]*?)\]\]/g, '<a href="#Category:$1">$1</a>'
+  text = text + "</div>"
+
+  text = text + '<div class="interwiki"><span>Interwiki</span>'
+  for iw in interwiki 
+    text = text + iw.replace /\[\[(..)\:([^|]*?)\]\]/g, '<a href="#$1:$2"><span>$1</span>$2</a>'
+  text = text + "</div>"
 
