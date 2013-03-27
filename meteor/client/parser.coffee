@@ -17,7 +17,7 @@ articleParse = (text, config, depth = 0) ->
     if not t?
       ''  # Templates can be empty. e.g. IsIn on Hitchwiki
     else
-      articleParse t, depth+1
+      articleParse t, config, depth+1
 
   # text = text.replace /<noinclude>.*?<\/noinclude>/gmi, ''  # doesn't work, hacky fix in css
 
