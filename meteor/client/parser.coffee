@@ -1,7 +1,7 @@
 
 
 
-articleParse = (text, depth = 0) ->
+articleParse = (text, config, depth = 0) ->
 
   # avoid infinite loops when parsing sub-templates
   if depth >= 5
@@ -31,7 +31,7 @@ articleParse = (text, depth = 0) ->
   # namespace(6)
   # Do we want to include external images? Both regexes returns the following parameters: Type=$1; Filename=$2; Params=$3; Caption=$5'
   # With links inside the caption:
-  text = text.replace /\[\[(File|Image):([^\|\]\[]+)((\|[^\|\]]+)*\|)(([^\[\]|]*?\[\[.+?\]\][^\]\[|]*?)+)\]\]/g, ''
+  text = text.replace /\[\[(File|Image):([^\|\]\[]+)((\|[^\|\]]+)*\|)(([^\[\]|]*?\[\[.+?\]\][^\]\[|]*?)+)\]\]/g, '<a href="' + config.url + '/File:$2">$5</a>'
   # Plaintext or empty caption:
   text = text.replace /\[\[(File|Image):([^\|\]\[]+)((\|[^\|\]\[]+)*)([^\[\]|]*?)\]\]/g, ''
 

@@ -24,7 +24,9 @@ pagesInCat = (cat) ->
   links = _.map titles, (t) -> '[[' + t + ']]'
   "*" + links.join("\n*")
 
-
+hitchwiki = 
+  url: 'http://hitchwiki.org/en/'
+  language: 'en'
 
 Template.page.siteName = ->
   Session.get 'jsonChanged'  # force reactivity
@@ -48,9 +50,9 @@ Template.page.content = ->
       # TODO: re_cat = new RegExp namespace(14) + ':(.+)'
       if m = title.match /Category:(.+)/
         console.log m
-        unsafe articleParse (pagesInCat(m[1]) + "\n\n" + value)
+        unsafe articleParse (pagesInCat(m[1]) + "\n\n" + value), hitchwiki
       else
-        unsafe articleParse value
+        unsafe articleParse value, hitchwiki
   else
     'no page found, or still processing...'
 
