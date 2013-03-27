@@ -57,6 +57,12 @@ articleParse = (text, depth = 0) ->
   text = text.replace /\[(.+?) (.+?)\]/g, '<a class="external" href="$1">$2</a>'
 
   # Tables
+  #text = text.replace /\{\|([^|]*?)\|([.\s\S]+?)\|\}/gm, (all, params, content) ->
+  #  content = content.replace /\|\-/g, '</tr><tr>'
+  #  content = content.replace /\|/g, '</td><td>'
+  #  '<table '+params+'><tr>' + content + '</tr></table>'
+
+
   text = text.replace /\{\|([^|]*?)\|([.\s\S]+?)\|\}/gm, '<table $1><tr><td>$2</td></tr></table>'
   text = text.replace /\|\-/g, '</tr><tr>'
   text = text.replace /\|/g, '</td><td>'
@@ -77,13 +83,16 @@ articleParse = (text, depth = 0) ->
   # ditch some special stuff
   text = text.replace /__(NOTOC|TOC|NOEDITSECTION)__/g, ''
 
-  text = text + '<div class="categories"><span>Categories</span>'
-  for cat in categories
-    text = text + cat.replace /\[\[Category\:([^|]*?)\]\]/g, '<a href="#Category:$1">$1</a>'
-  text = text + "</div>"
+  if categories? and categories.length > 0 and depth == 0
+    text = text + '<div class="categories"><span>Categories</span>'
+    for cat in categories
+      text = text + cat.replace /\[\[Category\:([^|]*?)\]\]/g, '<a href="#Category:$1">$1</a>'
+    text = text + "</div>"
 
-  text = text + '<div class="interwiki"><span>Interwiki</span>'
-  for iw in interwiki 
-    text = text + iw.replace /\[\[(..)\:([^|]*?)\]\]/g, '<a href="#$1:$2"><span>$1</span>$2</a>'
-  text = text + "</div>"
+  if interwiki? and interwiki.length > 0 and depth == 0
+    text = text + '<div class="interwiki"><span>Interwiki</span>'
+    for iw in interwiki 
+      text = text + iw.replace /\[\[(..)\:([^|]*?)\]\]/g, '<a href="#$1:$2"><span>$1</span>$2</a>'
+    text = text + "</div>"
 
+  text
