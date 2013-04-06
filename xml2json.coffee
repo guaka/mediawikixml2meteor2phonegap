@@ -43,6 +43,6 @@ fs.readFile "dump.xml", (err, data) ->
 
     console.log "json size:", json_out.length
 
-  fs.writeFile "dump.js", "var jsondump = " + json_out, (err) ->
+  fs.writeFile "dump.js", "jsondump = " + json_out, (err) ->
     throw err  if err
     console.log "saved dump.js"

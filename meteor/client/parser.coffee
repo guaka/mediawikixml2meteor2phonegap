@@ -1,7 +1,7 @@
 
 
 
-articleParse = (text, config, depth = 0) ->
+@articleParse = (text, config, depth = 0) ->
 
   # avoid infinite loops when parsing sub-templates
   if depth >= 5
@@ -38,13 +38,13 @@ articleParse = (text, config, depth = 0) ->
   # Trying to move categories to the end
   #text = text.replace /\[\[Category\:([^|]+?)\]\](.+*)/gm, '$2[[Category:$1]]'
 
-  # Categories 
+  # Categories
   categories = text.match /\[\[Category\:([^|]*?)\]\]/g
-  text = text.replace /\[\[Category\:([^|]*?)\]\]/g, '' 
+  text = text.replace /\[\[Category\:([^|]*?)\]\]/g, ''
 
   # Language-Interwiki
   interwiki = text.match /\[\[(..)\:([^|]*?)\]\]/g
-  text = text.replace /\[\[(..)\:([^|]*?)\]\]/g, '' 
+  text = text.replace /\[\[(..)\:([^|]*?)\]\]/g, ''
 
   # Match [[link]]
   text = text.replace /\[\[([^|]+?)\]\]/g, '<a href="#$1">$1</a>'
@@ -78,7 +78,7 @@ articleParse = (text, config, depth = 0) ->
   text = text.replace /\=\=\=\=(.*?)\=\=\=\=/g, '<h4>$1</h4>'
   text = text.replace /\=\=\=(.*?)\=\=\=/g, '<h3>$1</h3>'
   text = text.replace /\=\=(.*?)\=\=/g, '<h2>$1</h2>'
-  text = text.replace /^\=(.*?)\=$/g, '<h1>$1</h1>'  # fixed! 
+  text = text.replace /^\=(.*?)\=$/g, '<h1>$1</h1>'  # fixed!
 
   # ditch some special stuff
   text = text.replace /__(NOTOC|TOC|NOEDITSECTION)__/g, ''
@@ -91,7 +91,7 @@ articleParse = (text, config, depth = 0) ->
 
   if interwiki? and interwiki.length > 0 and depth == 0
     text = text + '<div class="interwiki"><span>Interwiki</span>'
-    for iw in interwiki 
+    for iw in interwiki
       text = text + iw.replace /\[\[(..)\:([^|]*?)\]\]/g, '<a href="#$1:$2"><span>$1</span>$2</a>'
     text = text + "</div>"
 

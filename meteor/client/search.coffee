@@ -1,5 +1,5 @@
 
-search = (s) ->
+@search = (s) ->
   found = _.find json.page, (p) -> p.title is s
   # First try to find exact match
   if found

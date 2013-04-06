@@ -1,7 +1,6 @@
 
 
-json = null
-
+@json = null
 
 addCssFromWiki = (page) ->
   css = document.createElement "style"
@@ -10,13 +9,16 @@ addCssFromWiki = (page) ->
   document.body.appendChild css
 
 
+@pagelist = null
+
 Meteor.startup ->
 
   if jsondump.hasOwnProperty 'mediawiki'
-    json = jsondump.mediawiki
+    @json = jsondump.mediawiki
   else
-    json = jsondump
+    @json = jsondump
   Session.set 'jsonChanged', Meteor.uuid()
+  @pagelist = _.pluck json.page, 'title'
 
   # TODO: ifExists
   addCssFromWiki 'MediaWiki:Vector.css'

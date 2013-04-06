@@ -39,7 +39,7 @@ sleep 5
 # And now do something phonegappy.
 # Add some links to meteor-phonegap scripts to make this work
 # 
-if [ -d ~/code/meteor-phonegap ]; then
-    meteor-phonegap/meteor2cordova.sh $WIKI.meteor.com
-    meteor-phonegap/signapk.sh
-fi
+# if [ -d ~/code/meteor-phonegap ]; then
+meteor2cordova.sh $WIKI.meteor.com
+signapk.sh
+#fi

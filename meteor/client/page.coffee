@@ -13,7 +13,7 @@ getPage = (title) ->
     p.title == title
 
 
-getPageText = (title) ->
+@getPageText = (title) ->
   getPage(title)?.revision.text.$t
 
 
@@ -24,7 +24,7 @@ pagesInCat = (cat) ->
   links = _.map titles, (t) -> '[[' + t + ']]'
   "*" + links.join("\n*")
 
-hitchwiki = 
+hitchwiki =
   url: 'http://hitchwiki.org/en/'
   language: 'en'
 
