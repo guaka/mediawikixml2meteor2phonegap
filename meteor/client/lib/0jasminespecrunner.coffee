@@ -19,6 +19,7 @@
   jasmineEnv.execute()
 
   Meteor.setInterval ->
-    document.title = 'testing mapsr' # doesn't work
+    # Repeatedly returning to /test so that refresh will work properly
+    document.title = 'running jasmine specs'
     Router.navigate 'test'
   , 3000
