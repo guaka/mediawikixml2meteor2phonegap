@@ -30,7 +30,7 @@
   # namespace(6)
   # Do we want to include external images? Both regexes returns the following parameters: Type=$1; Filename=$2; Params=$3; Caption=$5'
   # With links inside the caption:
-  text = text.replace /\[\[(File|Image):([^\|\]\[]+)((\|[^\|\]]+)*\|)(([^\[\]|]*?\[\[.+?\]\][^\]\[|]*?)+)\]\]/g, '<a href="' + config.url + '/File:$2">$5</a>'
+  text = text.replace /\[\[(File|Image):([^\|\]\[]+)((\|[^\|\]]+)*\|)(([^\[\]|]*?\[\[.+?\]\][^\]\[|]*?)+)\]\]/g, '<a target="_blank" href="' + config.url + '/File:$2">$5</a>'
   # Plaintext or empty caption:
   text = text.replace /\[\[(File|Image):([^\|\]\[]+)((\|[^\|\]\[]+)*)([^\[\]|]*?)\]\]/g, ''
 
@@ -55,32 +55,30 @@
   text = text.replace /\[([^ \]]+?)\]/g, '<a target="_blank" class="external" href="$1">$1</a>'
   text = text.replace /\[(.+?) (.+?)\]/g, '<a target="_blank" class="external" href="$1">$2</a>'
 
-  # Tables
-  #text = text.replace /\{\|([^|]*?)\|([.\s\S]+?)\|\}/gm, (all, params, content) ->
-  #  content = content.replace /\|\-/g, '</tr><tr>'
-  #  content = content.replace /\|/g, '</td><td>'
-  #  '<table '+params+'><tr>' + content + '</tr></table>'
+  regexen = [
 
+    # Tables
+    [/\{\|([^|]*?)\|([.\s\S]+?)\|\}/gm, '<table $1><tr><td>$2</td></tr></table>'],
+    [/\|\-/g, '</tr><tr>'],
+    [/\|/g, '</td><td>'],
 
-  text = text.replace /\{\|([^|]*?)\|([.\s\S]+?)\|\}/gm, '<table $1><tr><td>$2</td></tr></table>'
-  text = text.replace /\|\-/g, '</tr><tr>'
-  text = text.replace /\|/g, '</td><td>'
+    # strong + em
+    [/\'\'\'(.*?)\'\'\'/g, '<strong>$1</strong>'],
+    [/\'\'(.*?)\'\'/g, '<em>$1</em>'],
 
-  # bold
-  text = text.replace /\'\'\'(.*?)\'\'\'/g, '<strong>$1</strong>'
-  # and italic
-  text = text.replace /\'\'(.*?)\'\'/g, '<em>$1</em>'
+    [/\n\n/gm, '<br />'],
 
-  text = text.replace /\n\n/gm, '<br />'
+    # headings
+    [/\=\=\=\=(.*?)\=\=\=\=/g, '<h4>$1</h4>'],
+    [/\=\=\=(.*?)\=\=\=/g, '<h3>$1</h3>'],
+    [/\=\=(.*?)\=\=/g, '<h2>$1</h2>'],
+    [/^\=(.*?)\=$/g, '<h1>$1</h1>'],
 
-  # headings
-  text = text.replace /\=\=\=\=(.*?)\=\=\=\=/g, '<h4>$1</h4>'
-  text = text.replace /\=\=\=(.*?)\=\=\=/g, '<h3>$1</h3>'
-  text = text.replace /\=\=(.*?)\=\=/g, '<h2>$1</h2>'
-  text = text.replace /^\=(.*?)\=$/g, '<h1>$1</h1>'  # fixed!
+    [/__(NOTOC|TOC|NOEDITSECTION)__/g, ''],
+  ]
+  for replacement in regexen
+    text = text.replace replacement[0], replacement[1]
 
-  # ditch some special stuff
-  text = text.replace /__(NOTOC|TOC|NOEDITSECTION)__/g, ''
 
   if categories? and categories.length > 0 and depth is 0
     text = text + '<div class="categories"><span>Categories</span>'

@@ -7,7 +7,6 @@ namespace = (ns) ->
 
 
 getPage = (title) ->
-  console.log title
   title = title.replace /_/g, ' '
   page = _.find json.page, (p) ->
     p.title == title
@@ -52,7 +51,6 @@ Template.page.content = ->
     else
       # TODO: re_cat = new RegExp namespace(14) + ':(.+)'
       if m = title.match /Category:(.+)/
-        console.log m
         unsafe articleParse (pagesInCat(m[1]) + "\n\n" + value), config
       else
         unsafe articleParse value, config
