@@ -2599,7 +2599,7 @@ jasmine.version_= {
   "revision": 1354556913
 };
 
-// Addition for Mapsr: make jasmine object global
+// Addition for Meteor: make jasmine stuff global
 this.jasmine = jasmine;
 this.describe = describe;
 this.it = it;
