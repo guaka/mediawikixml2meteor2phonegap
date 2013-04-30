@@ -1,6 +1,5 @@
 
 
-
 @articleParse = (text, config, depth = 0) ->
 
   # avoid infinite loops when parsing sub-templates
@@ -83,13 +82,13 @@
   # ditch some special stuff
   text = text.replace /__(NOTOC|TOC|NOEDITSECTION)__/g, ''
 
-  if categories? and categories.length > 0 and depth == 0
+  if categories? and categories.length > 0 and depth is 0
     text = text + '<div class="categories"><span>Categories</span>'
     for cat in categories
       text = text + cat.replace /\[\[Category\:([^|]*?)\]\]/g, '<a href="#Category:$1">$1</a>'
     text = text + "</div>"
 
-  if interwiki? and interwiki.length > 0 and depth == 0
+  if interwiki? and interwiki.length > 0 and depth is 0
     text = text + '<div class="interwiki"><span>Interwiki</span>'
     for iw in interwiki
       text = text + iw.replace /\[\[(..)\:([^|]*?)\]\]/g, '<a href="#$1:$2"><span>$1</span>$2</a>'
