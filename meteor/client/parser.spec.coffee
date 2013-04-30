@@ -16,3 +16,7 @@ if wereTesting()
 
     it 'should make external links open in new window', ->
       expect(articleParse("[http://guaka.org/]", config)).toMatch /target=\"_blank\"/
+
+    it 'should handle lists', ->
+      expect(articleParse("* aleph\n* beth\n* gimel", config)).toMatch /<ul><li>\s*aleph\s*<\/li><li>\s*beth<\/li><li>\s*gimel<\/li><\/ul>/
+      expect(articleParse("# one\n# two\n# three", config)).toMatch /<ol><li>\s*one\s*<\/li><li>\s*two<\/li><li>\s*three<\/li><\/ol>/
