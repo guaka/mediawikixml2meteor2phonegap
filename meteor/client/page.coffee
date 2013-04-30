@@ -49,7 +49,7 @@ Template.page.content = ->
   if value?
     redirect = value.match /\#redirect \[\[(.+?)\]\]/i
     if redirect
-      Session.set 'currentTitle', redirect[1]
+      changePage redirect[1]
     else
       # TODO: re_cat = new RegExp namespace(14) + ':(.+)'
       if m = title.match /Category:(.+)/
@@ -65,12 +65,16 @@ Template.page.title = ->
   title
 
 
+@changePage = (page) ->
+  Session.set 'currentTitle', page
+
+
 Template.page.events
 
   'click a': (e) ->
     href = if e.srcElement? then e.srcElement.href else e.currentTarget.href
     title = href.split('#')[1]
-    Session.set 'currentTitle', ucfirst title
+    changePage ucfirst title
     window.scrollTo 0, 0
 
   'keydown #search': (evt) ->
