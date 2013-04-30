@@ -27,6 +27,8 @@ pagesInCat = (cat) ->
 # Can probably be derived from dump.js
 # Global because of parser tests
 @config =
+  # Fix this: "siteinfo":{"sitename":"Hitchwiki","base":"http://localhost/en/Main_Page","generator":
+  # https://github.com/guaka/hitchwiki/issues/30
   url: 'http://hitchwiki.org/en/'
   language: 'en'
 
