@@ -20,42 +20,40 @@
 
   # text = text.replace /<noinclude>.*?<\/noinclude>/gmi, ''  # doesn't work, hacky fix in css
 
-  # simple attempt at lists
-  text = text.replace /^\*(.*)/gm, '<ul><li>$1</li></ul>'
-  text = text.replace /(<\/ul>\s*<ul>)/g, ''
-
-  text = text.replace /^\#/gm, '<li>'
-
-  # Ditch images
-  # namespace(6)
-  # Do we want to include external images? Both regexes returns the following parameters: Type=$1; Filename=$2; Params=$3; Caption=$5'
-  # With links inside the caption:
-  text = text.replace /\[\[(File|Image):([^\|\]\[]+)((\|[^\|\]]+)*\|)(([^\[\]|]*?\[\[.+?\]\][^\]\[|]*?)+)\]\]/g, '<a target="_blank" href="' + config.url + '/File:$2">$5</a>'
-  # Plaintext or empty caption:
-  text = text.replace /\[\[(File|Image):([^\|\]\[]+)((\|[^\|\]\[]+)*)([^\[\]|]*?)\]\]/g, ''
-
-  # Trying to move categories to the end
-  #text = text.replace /\[\[Category\:([^|]+?)\]\](.+*)/gm, '$2[[Category:$1]]'
+  interwiki = text.match /\[\[(..)\:([^|]*?)\]\]/g
+  text = text.replace /\[\[(..)\:([^|]*?)\]\]/g, ''
 
   # Categories
   categories = text.match /\[\[Category\:([^|]*?)\]\]/g
   text = text.replace /\[\[Category\:([^|]*?)\]\]/g, ''
 
-  # Language-Interwiki
-  interwiki = text.match /\[\[(..)\:([^|]*?)\]\]/g
-  text = text.replace /\[\[(..)\:([^|]*?)\]\]/g, ''
-
-  # Match [[link]]
-  text = text.replace /\[\[([^|]+?)\]\]/g, '<a href="#$1">$1</a>'
-
-  # and now match [[link|text]]
-  text = text.replace /\[\[(.+?)\|(.+?)\]\]/g, '<a href="#$1">$2</a>'
-
-  # Hyperlinks
-  text = text.replace /\[([^ \]]+?)\]/g, '<a target="_blank" class="external" href="$1">$1</a>'
-  text = text.replace /\[(.+?) (.+?)\]/g, '<a target="_blank" class="external" href="$1">$2</a>'
-
   regexen = [
+    # simple attempt at lists
+    [/^\*(.*)/gm, '<ul><li>$1</li></ul>'],
+    [/(<\/ul>\s*<ul>)/g, ''],
+
+    [/^\#(.*)/gm, '<ol><li>$1</li></ol>'],
+    [/(<\/ol>\s*<ol>)/g, ''],
+
+    # Ditch images
+    # namespace(6)
+    # Do we want to include external images? Both regexes returns the following parameters: Type=$1; Filename=$2; Params=$3; Caption=$5'
+    # With links inside the caption:
+    [/\[\[(File|Image):([^\|\]\[]+)((\|[^\|\]]+)*\|)(([^\[\]|]*?\[\[.+?\]\][^\]\[|]*?)+)\]\]/g, '<a target="_blank" href="' + config.url + '/File:$2">$5</a>'],
+
+    # Plaintext or empty caption:
+    [/\[\[(File|Image):([^\|\]\[]+)((\|[^\|\]\[]+)*)([^\[\]|]*?)\]\]/g, ''],
+
+
+    # Match [[link]]
+    [/\[\[([^|]+?)\]\]/g, '<a href="#$1">$1</a>'],
+
+    # and now match [[link|text]]
+    [/\[\[(.+?)\|(.+?)\]\]/g, '<a href="#$1">$2</a>'],
+
+    # Hyperlinks
+    [/\[([^ \]]+?)\]/g, '<a target="_blank" class="external" href="$1">$1</a>'],
+    [/\[(.+?) (.+?)\]/g, '<a target="_blank" class="external" href="$1">$2</a>'],
 
     # Tables
     [/\{\|([^|]*?)\|([.\s\S]+?)\|\}/gm, '<table $1><tr><td>$2</td></tr></table>'],
