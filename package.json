@@ -1,18 +1,22 @@
 {
   "name": "mediawikixml2meteor2phonegap",
   "preferGlobal": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "guaka <kasper.souren@gmail.com>",
   "description": "turn MediaWiki XML dumps into a Meteor apps into Phonegap",
   "contributors": [ 
     {
-      "name": "Mikael Korpela",
-      "email": "mikael@ihminen.org"
-    }, 
+      "name": "Kasper Souren",
+      "email": "kasper.souren@gmail.com"
+    }                    
     {
       "name": "Philipp Gruber",
       "email": "philipp.gruber@flupps.net"
     } 
+    {
+      "name": "Mikael Korpela",
+      "email": "mikael@ihminen.org"
+    }, 
   ],
   "repository": {
     "type": "git",
