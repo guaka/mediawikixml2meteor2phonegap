@@ -10,6 +10,9 @@ if wereTesting()
       expect(articleParse('=== Hitchhiking ===', config)).toMatch /<h3>\s*Hitchhiking\s*<\/h3>/
       expect(articleParse('==== Hitchhiking ====', config)).toMatch /<h4>\s*Hitchhiking\s*<\/h4>/
 
-    it 'make stuff bold and italic', ->
+    it 'should make stuff bold and italic', ->
       expect(articleParse("''Hitchhiking''", config)).toMatch /<em>Hitchhiking<\/em>/
       expect(articleParse("'''Hitchhiking'''", config)).toMatch /<strong>Hitchhiking<\/strong>/
+
+    it 'should make external links open in new window', ->
+      expect(articleParse("[http://guaka.org/]", config)).toMatch /target=\"_blank\"/

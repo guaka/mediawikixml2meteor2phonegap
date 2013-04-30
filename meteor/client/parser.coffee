@@ -52,8 +52,8 @@
   text = text.replace /\[\[(.+?)\|(.+?)\]\]/g, '<a href="#$1">$2</a>'
 
   # Hyperlinks
-  text = text.replace /\[([^ \]]+?)\]/g, '<a class="external" href="$1">$1</a>'
-  text = text.replace /\[(.+?) (.+?)\]/g, '<a class="external" href="$1">$2</a>'
+  text = text.replace /\[([^ \]]+?)\]/g, '<a target="_blank" class="external" href="$1">$1</a>'
+  text = text.replace /\[(.+?) (.+?)\]/g, '<a target="_blank" class="external" href="$1">$2</a>'
 
   # Tables
   #text = text.replace /\{\|([^|]*?)\|([.\s\S]+?)\|\}/gm, (all, params, content) ->
