@@ -8,15 +8,15 @@
     {
       "name": "Kasper Souren",
       "email": "kasper.souren@gmail.com"
-    }                    
+    },
     {
       "name": "Philipp Gruber",
       "email": "philipp.gruber@flupps.net"
-    } 
+    }, 
     {
       "name": "Mikael Korpela",
       "email": "mikael@ihminen.org"
-    }, 
+    }
   ],
   "repository": {
     "type": "git",
