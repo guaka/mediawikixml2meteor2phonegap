@@ -1,4 +1,4 @@
-**this code is probably not working anymore as of September 2014**
+**this code is not working anymore as of September 2014**
 
 
 
@@ -34,4 +34,4 @@ Examples
 * (Dutch Wikivoyage)[http://nlwikivoyage.meteor.com/]
 
 
-Currently GPLv2+ for compatibility with MediaWiki.
+GPLv2+ for compatibility with MediaWiki.
